@@ -19,20 +19,18 @@ int	read_piece_width_height(t_data *data)
 	tmp = '[';
 	while (tmp != '\0' && (tmp < '0' || tmp > '9'))
 	{
-		if (read(data->map_test, &tmp, 1) < 1)
+		if (read(0, &tmp, 1) < 1)
 			return (-1);
-		fprintf(data->read_log, "%c", tmp);
 	}
 	if (tmp >= '0' && tmp <= '9')
-		mark_width_height((&data->piece->pheight), data, &tmp);
+		mark_width_height(&data->piece->p_height, &tmp);
 	while (tmp != '\0' && (tmp < '0' || tmp > '9'))
 	{
-		if (read(data->map_test, &tmp, 1) < 1)
+		if (read(0, &tmp, 1) < 1)
 			return (-1);
-		fprintf(data->read_log, "%c", tmp);
 	}
 	if (tmp >= '0' && tmp <= '9')
-		mark_width_height(&data->piece->pwidth, data, &tmp);
+		mark_width_height(&data->piece->p_width, &tmp);
 	return (0);
 }
 
@@ -40,7 +38,7 @@ int	build_piece(t_data *data)
 {
 	int	arr_size;
 
-	arr_size = data->piece->pheight * data->piece->pwidth;
+	arr_size = data->piece->p_height * data->piece->p_width;
 	data->piece->x = (int *)malloc(sizeof(int) * arr_size);
 	if (!data->piece->x)
 		return (-1);
@@ -53,39 +51,53 @@ int	build_piece(t_data *data)
 	return (0);
 }
 
-int	read_piece_shape(t_data *data)
+void	mark_piece_star(t_data *data, int x, int y, int *i)
+{
+	data->piece->x[*i] = x;
+	data->piece->y[*i] = y;
+	*i += 1;
+}
+
+int	read_piece_shape(t_data *data, int i)
 {
 	char	tmp;
 	int		x;
 	int		y;
-	int		i;
 
 	x = -1;
 	y = 0;
-	i = 0;
 	tmp = '[';
-	if (read(data->map_test, &tmp, 1) < 0)
+	if (read(0, &tmp, 1) < 0)
 		return (-1);
-	fprintf(data->read_log, "%c", tmp);
-	while (y < data->piece->pheight)
+	while (y < data->piece->p_height)
 	{
-		while (x < data->piece->pwidth) // test with vm
-		// while (x < data->piece->pwidth - 1) //for own test
+		while (x < data->piece->p_width)
 		{
-			if (read(data->map_test, &tmp, 1) < 0)
+			if (read(0, &tmp, 1) < 0)
 				return (-1);
 			x++;
-			fprintf(data->read_log, "%c", tmp);
 			if (tmp == '*')
-			{
-				data->piece->x[i] = x;
-				data->piece->y[i] = y;
-				i++;
-			}
+				mark_piece_star(data, x, y, &i);
 		}
 		x = -1;
 		y++;
 	}
 	data->piece->stars = i;
+	return (0);
+}
+
+int	build_piece_heatmap(t_data *data)
+{
+	int	i;
+
+	data->piece->in_heat = (int *)malloc(sizeof(int) * data->piece->stars);
+	if (!data->piece->in_heat)
+		return (-1);
+	else
+	{
+		i = 0;
+		while (i < data->piece->stars)
+			data->piece->in_heat[i++] = 0;
+	}
 	return (0);
 }

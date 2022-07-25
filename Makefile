@@ -1,12 +1,13 @@
 CC = gcc
 NAME = igaplich.filler
-FLAGS =-g -Wall -Wextra #-fsanitize=address
+FLAGS =-g -Wall -Wextra -fsanitize=address
 
 SRC_DIR = ./src/
 SRC_FILES = main.c \
 	utils.c \
 	map.c \
-	piece.c
+	piece.c \
+	insert_piece.c
 SRC = $(addprefix $(SRC_DIR), $(SRC_FILES))
 
 OBJ_DIR = ./obj/
@@ -21,13 +22,13 @@ LIBPRINT_DIR = libft/
 LIBPRINT = libftprintf.a
 
 compile:
-	$(CC) -g $(FLAGS) src/*.c -o $(NAME)
+	$(CC) -g $(FLAGS) src/*.c -o $(NAME) -I libft/includes/ft_printf.h -L. libft/libftprintf.a
 
 all : $(NAME)
 
 $(NAME): $(OBJ) 
 	@make -C ./libft
-	@$(CC) -o $(NAME) $(FLAGS) $(OBJ)  -L. libft/libftprintf.a
+	@$(CC) -o $(NAME) $(FLAGS) $(OBJ) -I libft/includes/ft_printf.h -L. libft/libftprintf.a
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c clean
 	@mkdir $(OBJ_DIR)
