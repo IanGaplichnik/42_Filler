@@ -13,13 +13,14 @@ screen = pygame.display.set_mode((1920 / 2, 1280 / 2))
 pygame.display.set_caption("42_Filler")
 
 clock = pygame.time.Clock()
+game_font = "/Users/macbook/Documents/Hive/42_Filler/visualizer/press-start/prstart.ttf"
 
 
 
 
 def parse_player_num():
-	text_out = pygame.font.Font("press-start/prstart.ttf", 8)
-	game_out = pygame.font.Font("press-start/prstart.ttf", 30)
+	text_out = pygame.font.Font(game_font, 8)
+	game_out = pygame.font.Font(game_font, 30)
 
 	for _ in range(5):
 		sys.stdin.readline()
@@ -81,7 +82,7 @@ def parse_map(rows, columns):
 	p2_new.fill('coral')
 	empty = pygame.Surface(((450 / divider) - 2, (450 / divider) - 2))
 	empty.fill('gray19')
-	text_out = pygame.font.Font("press-start/prstart.ttf", 8)
+	text_out = pygame.font.Font(game_font, 8)
 
 	clear = pygame.Surface((450, 50))
 	clear.fill('black')
@@ -164,7 +165,7 @@ def parse_piece(p_rows, p_columns, first_player):
 		y += 1
 
 def pause():
-	text_out = pygame.font.Font("press-start/prstart.ttf", 15)
+	text_out = pygame.font.Font(game_font, 15)
 	text_surface = text_out.render("PAUSE", True, 'white')
 	empty = pygame.Surface((200, 200))
 	empty.fill('black')
@@ -187,7 +188,7 @@ def pause():
 
 def pause_finish(o_score, x_score, p1, p2):
 	paused = True
-	text_out = pygame.font.Font("press-start/prstart.ttf", 13)
+	text_out = pygame.font.Font(game_font, 13)
 	if o_score > x_score:
 		text_surface = text_out.render(p1 + " wins", True, 'white')
 	if x_score > o_score:

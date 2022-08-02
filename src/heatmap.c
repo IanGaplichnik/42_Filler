@@ -12,6 +12,11 @@
 
 #include "../includes/filler.h"
 
+/*
+ * Based on the size of the map, 2D integer array
+ * of the same size is allocated and every value is set to -1
+ * (meaning the value is "free", or not taken by any of the players)
+ */
 int	build_heatmap(t_data *data)
 {
 	int	y;
@@ -41,6 +46,10 @@ int	build_heatmap(t_data *data)
 	return (0);
 }
 
+/*
+ * Setting all -1 values around position
+ * to (value + 1).
+ */
 void	set_around_slot(t_data *data, int x, int y)
 {
 	int	x_off;
@@ -68,6 +77,14 @@ void	set_around_slot(t_data *data, int x, int y)
 	}
 }
 
+/*
+ * Heat map being updated, by filling out "empty" (-1) values.
+ * Each -1 value is replaced with the (smallest value + 1), found in a square
+ * around the current piece.
+ * If any change is made to the heatmao, filled flag is turned off,
+ * signalising, map needs to be checked and possible
+ * filled again.
+ */
 int	update_heatmap(t_data *data, int x, int y)
 {
 	int	filled;

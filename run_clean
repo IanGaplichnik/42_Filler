@@ -1,0 +1,25 @@
+#!/bin/bash
+
+case "${1}" in
+
+0)
+	resources/filler_vm -f resources/maps/map00 -p2 ./igaplich.filler -p1 resources/players/carli.filler | python3 visualizer/vis.py #&& pkill -f .filler # -q
+;;
+
+1)
+	resources/filler_vm -f resources/maps/map01 -p2 ./igaplich.filler -p1 resources/players/carli.filler | python3 visualizer/vis.py && pkill -f .filler # -q
+;;
+
+2)
+	resources/filler_vm -f resources/maps/map02 -p1 ./igaplich.filler -p2 resources/players/carli.filler | python3 visualizer/vis.py && pkill -f .filler # -q
+;;
+
+3)
+	../removing.out
+;;
+
+*)
+	echo -n "unknown"
+;;
+
+esac

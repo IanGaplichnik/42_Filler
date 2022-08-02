@@ -13,19 +13,30 @@
 #include "../includes/filler.h"
 #include <math.h>
 
-int	mark_best_piece(t_data *data, int x, int y, t_insert c)
+/*
+ * Checking, if current position is better, than previous,
+ * And saving, if it is better.
+ */
+int	mark_best_piece(t_data *data, int x, int y, t_insert *c)
 {
-	if (c.i == data->piece->stars && c.overlap == 1
-		&& data->map->best_value > c.lowest)
+	if (c->i == data->piece->stars && c->overlap == 1
+		&& data->map->best_value > c->lowest)
 	{
 		data->map->best_x = x;
 		data->map->best_y = y;
-		data->map->best_value = c.lowest;
+		data->map->best_value = c->lowest;
 		return (1);
 	}
 	return (-1);
 }
 
+/*
+ * Testing, if piece can be inserted at current
+ * position, before player has touched the enemy.
+ * Heat map is not generated at this point and not used.
+ * Checking for validity: only one overlap with players
+ * territory, not overlaping with enemy.
+ */
 int	insert_before(t_data *data, int x, int y)
 {
 	t_insert	c;
@@ -52,39 +63,15 @@ int	insert_before(t_data *data, int x, int y)
 		else
 			return (-1);
 	}
-	return (mark_best_piece(data, x, y, c));
+	return (mark_best_piece(data, x, y, &c));
 }
 
-void	check_around(t_data *data, int x, int y, t_insert *c)
-{
-	int x_off;
-	int	y_off;
-	int	touch_enemy;
-	int	side;
-
-	x_off = -1;
-	y_off = -1;
-	if (x == 0 || x == data->map_width - 1 || y == 0 || y == data->map_height - 1)
-		c->side = 1;
-	while (y_off < 2)
-	{
-		while (x_off < 2)
-		{
-			if (x + x_off < data->map_width && x + x_off >= 0
-				&& y + y_off < data->map_height && y + y_off >= 0)
-			{
-				if (data->map->heatmap[y + y_off][x + x_off] == 0)
-					c->touch_enemy = 1;
-			}
-			x_off++;
-		}
-		x_off = -1;
-		y_off++;
-	}
-	if (c->side && c->touch_enemy)
-		c->priority = 1;
-}
-
+/*
+ * Inserting piece, based on a heatmap.
+ * Checking for validity: only one overlap with players
+ * territory, not overlaping with enemy. Checking, how close
+ * it is to the enemy.
+ */
 int	insert_after(t_data *data, int x, int y)
 {
 	t_insert	c;
@@ -92,12 +79,10 @@ int	insert_after(t_data *data, int x, int y)
 	c.lowest = 100000;
 	c.overlap = 0;
 	c.i = 0;
-	c.priority = 0;
 	while (c.i < data->piece->stars && c.overlap < 2)
 	{
 		c.x_act = x + data->piece->x[c.i];
 		c.y_act = y + data->piece->y[c.i];
-		check_around(data, c.x_act, c.y_act, &c);
 		if (c.y_act < data->map_height && c.x_act < data->map_width)
 		{
 			if (data->map->heatmap[c.y_act][c.x_act] == -2)
@@ -112,9 +97,13 @@ int	insert_after(t_data *data, int x, int y)
 		else
 			return (-1);
 	}
-	return (mark_best_piece(data, x, y, c));
+	return (mark_best_piece(data, x, y, &c));
 }
 
+/*
+ * Checking, whether there is an enemy piece, next to
+ * the given position
+ */
 void	check_contact(t_data *data, int x, int y)
 {
 	int	x_off;
@@ -139,8 +128,20 @@ void	check_contact(t_data *data, int x, int y)
 	}
 }
 
-int	place_iterative(t_data *data, int x, int y, int i)
+/*
+ * Algorithm, which places the piece on the map
+ * using previously collected data.
+ * Before player "touches" enemy, the direction is chosen
+ * by choosing the shortest diagonal path from players last position
+ * to enemies last position. After contact has been made
+ * position of insertion is made, based on a heatmap.
+ * The main principle is consequently iterating through
+ * positions and finding the best one.
+ * If no valid positions left, "0 0\n" is printed.
+ */
+int	place_piece(t_data *data, int x, int y, int i)
 {
+	data->priority = 0;
 	while (y < data->map_height)
 	{
 		while (x < data->map_width)

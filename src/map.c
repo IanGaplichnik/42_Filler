@@ -12,6 +12,11 @@
 
 #include "../includes/filler.h"
 
+/*
+ * Converting string number to an integer and saving
+ * it to a passed parameter: width or height of
+ * either map or piece
+ */
 int	mark_width_height(int *param, char *tmp)
 {
 	while (*tmp >= '0' && *tmp <= '9')
@@ -23,6 +28,13 @@ int	mark_width_height(int *param, char *tmp)
 	return (0);
 }
 
+/*
+ * Reading width and height of the play field.
+ * Readings are converted into an int value and saved in
+ * data structure.
+ * If width or height is less, than one, or there's an error
+ * reading the input, -1 is returned.
+ */
 int	read_map_size(t_data *data)
 {
 	char	tmp;
@@ -50,16 +62,19 @@ int	read_map_size(t_data *data)
 	return (0);
 }
 
+/* 
+ * Reading players symbols in the beginning of the game.
+ * If players number is 1, then it uses 'O' and 'o' symbols
+ * on the playing field. Otherwise, it uses 'X' and 'x' symbols.
+ */
 int	read_players_symb(t_data *data)
 {
 	char	tmp;
-	int		ret;
 
 	tmp = '}';
 	while (tmp != '\0' && (tmp < '0' || tmp > '9'))
 	{
-		ret = read(0, &tmp, 1);
-		if (ret < 0)
+		if (read(0, &tmp, 1) < 0)
 			return (-1);
 	}
 	if (tmp == '1')
@@ -75,6 +90,12 @@ int	read_players_symb(t_data *data)
 	return (0);
 }
 
+/*
+ * Parsing one row of the playfield from STDIN.
+ * if symbol corresponds to the enemy symbol, corresponding
+ * heatmap value is marked set to 0. If symbol corresponds
+ * to the player symbol, corresponding heatmap value is set to -2
+ */
 int	parse_map_row(t_data *data, char *tmp, int y)
 {
 	int	x;
@@ -102,6 +123,11 @@ int	parse_map_row(t_data *data, char *tmp, int y)
 	return (1);
 }
 
+/*
+ * Map is being read. Skipping rubbish values
+ * before the actual map starts, and then calling
+ * the parsing function to parse one row
+ */
 int	read_map(t_data *data)
 {
 	char	tmp;

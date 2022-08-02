@@ -12,27 +12,11 @@
 
 #include "../includes/filler.h"
 
-void	init_ingame(t_data *data)
-{
-	free(data->piece->x);
-	data->piece->x = NULL;
-	free(data->piece->y);
-	data->piece->y = NULL;
-	data->piece->p_height = 0;
-	data->piece->p_width = 0;
-	data->piece->stars = 0;
-	data->map_height = 0;
-	data->map_width = 0;
-	data->map->filled = 0;
-	data->map->max_value = 0;
-	data->map->best_x = -1;
-	data->map->best_y = -1;
-	data->map->best_value = 100000000;
-	data->ex = -2;
-	data->ey = -2;
-	data->side_touch = 0;
-}
-
+/* 
+ * Function, calling different map operations.
+ * Reading map, allocating arrays of map size 
+ * and building heat map happen here
+ */
 int	map_operations(t_data *data)
 {
 	if (read_map_size(data) == -1)
@@ -46,6 +30,10 @@ int	map_operations(t_data *data)
 	return (0);
 }
 
+/* Performing operations with the piece,
+ * which algorithm will insert in the map. Reading
+ * it, converting to the required format happen here.
+ */
 int	piece_operations(t_data *data)
 {
 	if (read_piece_width_height(data) == -1)
@@ -54,12 +42,17 @@ int	piece_operations(t_data *data)
 		return (-1);
 	if (read_piece_shape(data, 0) == -1)
 		return (-1);
-	build_piece_heatmap(data);
-	if (place_iterative(data, 0, 0, -1) == -1)
+	if (place_piece(data, 0, 0, -1) == -1)
 		return (-1);
 	return (0);
 }
 
+/* 
+ * Main function, running as long, as required text
+ * is in correct format and exists. Loop stops, if whether there's
+ * nothing to read or formatting is wrong. Players symbols are only
+ * read once, due to the format of the input.
+ */
 int	main(void)
 {
 	t_data	data;
@@ -76,9 +69,11 @@ int	main(void)
 		return (-1);
 	while (ret >= 0)
 	{
-		if (map_operations(&data) == -1)
+		ret = map_operations(&data);
+		if (ret == -1)
 			return (-1);
-		if (piece_operations(&data) == -1)
+		ret = piece_operations(&data);
+		if (ret == -1)
 			return (-1);
 		init_ingame(&data);
 		i++;

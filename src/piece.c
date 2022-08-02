@@ -12,6 +12,10 @@
 
 #include "../includes/filler.h"
 
+/* Width and height of a single piece are read.
+ * After reading, values are being converted to integers
+ * and saved in data->piece structure
+ */
 int	read_piece_width_height(t_data *data)
 {
 	char	tmp;
@@ -34,6 +38,9 @@ int	read_piece_width_height(t_data *data)
 	return (0);
 }
 
+/*
+ * Based on the dimensions of the piece, 2D integer array is being created
+ */
 int	build_piece(t_data *data)
 {
 	int	arr_size;
@@ -58,6 +65,13 @@ void	mark_piece_star(t_data *data, int x, int y, int *i)
 	*i += 1;
 }
 
+/*
+ * Reading piece shape from the input and saving non-empty
+ * coordinates in separate piece->x and piece->y arrays.
+ * For instance, coordinates for 2x2 square, missing top left slot will be:
+ * x: 1, 0, 1
+ * y: 0, 1, 1
+ */
 int	read_piece_shape(t_data *data, int i)
 {
 	char	tmp;
@@ -83,21 +97,5 @@ int	read_piece_shape(t_data *data, int i)
 		y++;
 	}
 	data->piece->stars = i;
-	return (0);
-}
-
-int	build_piece_heatmap(t_data *data)
-{
-	int	i;
-
-	data->piece->in_heat = (int *)malloc(sizeof(int) * data->piece->stars);
-	if (!data->piece->in_heat)
-		return (-1);
-	else
-	{
-		i = 0;
-		while (i < data->piece->stars)
-			data->piece->in_heat[i++] = 0;
-	}
 	return (0);
 }

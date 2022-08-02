@@ -1,6 +1,6 @@
 CC = gcc
 NAME = igaplich.filler
-FLAGS =-g -Wall -Wextra -fsanitize=address
+FLAGS = -Wall -Wextra -fsanitize=address
 
 SRC_DIR = ./src/
 SRC_FILES = main.c \
@@ -22,7 +22,7 @@ LIBPRINT_DIR = libft/
 LIBPRINT = libftprintf.a
 
 compile:
-	$(CC) -g $(FLAGS) src/*.c -o $(NAME) -I libft/includes/ft_printf.h -L. libft/libftprintf.a
+	$(CC) $(FLAGS) src/*.c -o $(NAME) -I libft/includes/ft_printf.h -L. libft/libftprintf.a
 
 all : $(NAME)
 
