@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../includes/filler.h"
+#include <stdio.h>
 
 /* 
  * Function, calling different map operations.
@@ -59,10 +60,8 @@ int	main(void)
 	t_piece	piece;
 	t_map	map;
 	int		ret;
-	int		i;
 
 	ret = 1;
-	i = 0;
 	if (init_data(&data, &piece, &map) == -1)
 		return (-1);
 	if (read_players_symb(&data) == -1)
@@ -76,7 +75,6 @@ int	main(void)
 		if (ret == -1)
 			return (-1);
 		init_ingame(&data);
-		i++;
 	}
 	return (0);
 }
