@@ -121,7 +121,7 @@ $(NAME): $(OBJ) $(LIB_OBJ) $(HEADERS)
 	@echo "$(CGREEN)OK$(CEND)"
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c
-	@mkdir $(OBJ_PATH) 2>/dev/null || echo "" > /dev/null
+	@mkdir -p $(OBJ_PATH)
 	@$(CC) $(FLAGS) $(INCLUDES) -c $< -o $@
 
 $(LIB_OBJ_PATH)%.o: $(LIB_SRC_PATH)%.c

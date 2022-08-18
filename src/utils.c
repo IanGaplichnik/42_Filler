@@ -60,3 +60,10 @@ void	init_ingame(t_data *data)
 	data->ey = -2;
 	data->priority = 0;
 }
+
+int	ft_abs(double long x)
+{
+	if (x < 0)
+		return (-x);
+	return (x);
+}

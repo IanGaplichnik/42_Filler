@@ -13,7 +13,7 @@
 #ifndef FILLER_H
 # define FILLER_H
 
-# include "../libft/includes/ft_printf.h"
+# include "../libftprintf/includes/ft_printf.h"
 
 typedef struct s_insert
 {
@@ -70,5 +70,6 @@ int		build_heatmap(t_data *data);
 int		update_heatmap(t_data *data, int x, int y);
 int		place_piece(t_data *data, int x, int y, int i);
 int		build_piece_heatmap(t_data *data);
+int		ft_abs(double long x);
 
 #endif

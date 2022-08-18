@@ -6,9 +6,9 @@ import time
 
 pygame.init()
 
-res_div = 1 #MODIFY TO CHANGE RESOLUTION
+res_div = 0.7 #MODIFY TO CHANGE RESOLUTION
 
-screen = pygame.display.set_mode((1680 / res_div, 1020 / res_div))
+screen = pygame.display.set_mode((1790 / res_div, 1000 / res_div))
 screen_color = (18, 18, 20)
 screen.fill(screen_color)
 pygame.display.set_caption("42_Filler")
@@ -19,6 +19,11 @@ p1_old_color = 0x9b5de5
 p1_new_color = 0xf15bb5
 p2_old_color = 0x00bbf9
 p2_new_color = 0x00f5d4
+
+# p1_old_color = 0x2a9d8f
+# p1_new_color = 0xe63946
+# p2_old_color = 0x8338ec
+# p2_new_color = 0xffe66d
 
 p1_text = p1_old_color << 8
 p2_text = p2_old_color << 8
@@ -45,7 +50,7 @@ def print_interface(p1, p2):
 	screen.blit(text_surface, (1100 / res_div, 200 / res_div))
 
 	text_surface = text_out.render(p1, True, p1_text)
-	screen.blit(text_surface, (1100 / res_div, 220 / res_div))
+	screen.blit(text_surface, (1100 / res_div, 225 / res_div))
 
 	text_surface = text_out.render("Last received piece:", True, 'white')
 	screen.blit(text_surface, (1100 / res_div, 250 / res_div))
@@ -54,7 +59,7 @@ def print_interface(p1, p2):
 	screen.blit(text_surface, (1100 / res_div, 600 / res_div))
 
 	text_surface = text_out.render(p2, True, p2_text)
-	screen.blit(text_surface, (1100 / res_div, 620 / res_div))
+	screen.blit(text_surface, (1100 / res_div, 625 / res_div))
 
 	text_surface = text_out.render("Last received piece:", True, 'white')
 	screen.blit(text_surface, (1100 / res_div, 650 / res_div))
@@ -93,8 +98,6 @@ def parse_map(rows, columns, moves_p1, moves_p2):
 	clear = pygame.Surface((900 / res_div, 100 / res_div))
 	clear.fill(screen_color)
 	screen.blit(clear, (100 / res_div, 130 / res_div))
-
-	
 
 	flag_p1 = 0
 	flag_p2 = 0
@@ -175,10 +178,10 @@ def parse_piece(p_rows, p_columns, first_player):
 def pause():
 	text_out = pygame.font.Font(game_font, int(15 / res_div))
 	text_surface = text_out.render("PAUSE", True, 'white')
-	empty = pygame.Surface((400 / res_div, 400 / res_div))
+	empty = pygame.Surface((400 / res_div, 930 / res_div))
 	empty.fill(screen_color)
 
-	screen.blit(text_surface, (480 / res_div, 600 / res_div))
+	screen.blit(text_surface, (450 / res_div, 930 / res_div))
 	pygame.display.update()
 	paused = True
 	while paused:
@@ -189,7 +192,8 @@ def pause():
 					exit()
 				if event.key == pygame.K_SPACE:
 					paused = False
-					screen.blit(empty, (400 / res_div, 400 / res_div))
+					screen.blit(empty, (450 / res_div, 930 / res_div))
+					pygame.display.update()
 			if event.type == pygame.QUIT:
 				pygame.quit()
 				exit()
@@ -203,7 +207,7 @@ def pause_finish(o_score, x_score, p1, p2):
 		text_surface = text_out.render(p2 + " wins", True, p2_text)
 	if x_score == o_score:
 		text_surface = text_out.render("Draw", True, 'white')
-	screen.blit(text_surface, (130 / res_div, 920 / res_div))
+	screen.blit(text_surface, (130 / res_div, 870 / res_div))
 	pygame.display.update()
 
 	while paused:

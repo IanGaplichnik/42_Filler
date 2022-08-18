@@ -1,13 +1,18 @@
+CYELLOW=\033[0;33m
+CEND=\033[0m
+CGREEN=\033[0;32m
+
 CC = gcc
 NAME = igaplich.filler
-FLAGS = -Wall -Wextra -fsanitize=address
+FLAGS = -Wall -Wextra -Werror -fsanitize=address
 
 SRC_DIR = ./src/
 SRC_FILES = main.c \
 	utils.c \
 	map.c \
 	piece.c \
-	insert_piece.c
+	insert_piece.c \
+	heatmap.c
 SRC = $(addprefix $(SRC_DIR), $(SRC_FILES))
 
 OBJ_DIR = ./obj/
@@ -18,28 +23,32 @@ INC_DIR = ./includes/
 INC_FILES = filler.h
 INC = $(addprefix $(INC_DIR), $(INC_FILES))
 
-LIBPRINT_DIR = libft/
-LIBPRINT = libftprintf.a
-
-compile:
-	$(CC) $(FLAGS) src/*.c -o $(NAME) -I libft/includes/ft_printf.h -L. libft/libftprintf.a
+LIBPRINT_DIR = libftprintf/
+LIBPRINT_LIB = libftprintf.a
+LIBPRINT = $(addprefix $(LIBPRINT_DIR), $(LIBPRINT_LIB))
 
 all : $(NAME)
 
 $(NAME): $(OBJ) 
-	@make -C ./libft
-	@$(CC) -o $(NAME) $(FLAGS) $(OBJ) -I libft/includes/ft_printf.h -L. libft/libftprintf.a
+	@make -C $(LIBPRINT_DIR)
+	@echo "$(CYELLOW)Compiling $(NAME)$(CEND)"
+	@$(CC) -o $(NAME) $(FLAGS) $(OBJ) -I libftprintf/includes/ft_printf.h -L. $(LIBPRINT)
+	@echo "$(CGREEN)OK$(CEND)"
 
-$(OBJ_DIR)%.o: $(SRC_DIR)%.c clean
-	@mkdir $(OBJ_DIR)
+$(OBJ_DIR)%.o: $(SRC_DIR)%.c
+	@mkdir -p $(OBJ_DIR)
 	@$(CC) $(FLAGS) -c $< -o $@
 
 clean :
-	@make -C ./libft clean
+	@make -C $(LIBPRINT_DIR) clean
+	@echo "$(CYELLOW)Removing $(NAME) object folder$(CEND)"
 	@rm -rf $(OBJ_DIR)
+	@echo "$(CGREEN)OK$(CEND)"
 
 fclean : clean
-	@make -C ./libft fclean
-	@rm -f $(NAME)
+	@make -C $(LIBPRINT_DIR) fclean
+	@echo "$(CYELLOW)Removing $(NAME)$(CEND)"
+	@rm -rf $(NAME)
+	@echo "$(CGREEN)OK$(CEND)"
 
 re : fclean all clean all

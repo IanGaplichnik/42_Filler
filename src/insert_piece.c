@@ -50,10 +50,10 @@ int	insert_before(t_data *data, int x, int y)
 		c.y_act = y + data->piece->y[c.i];
 		if (c.y_act < data->map_height && c.x_act < data->map_width)
 		{
-			if (abs(abs(data->ex - (c.x_act))
-					+ abs(data->ey - (c.y_act))) < c.lowest)
-				c.lowest = abs(abs(data->ex - (c.x_act))
-						+ abs(data->ey - (c.y_act)));
+			if (ft_abs(ft_abs(data->ex - (c.x_act))
+					+ ft_abs(data->ey - (c.y_act))) < c.lowest)
+				c.lowest = ft_abs(ft_abs(data->ex - (c.x_act))
+						+ ft_abs(data->ey - (c.y_act)));
 			if (data->map->heatmap[c.y_act][c.x_act] == -2)
 				c.overlap++;
 			else if (data->map->heatmap[c.y_act][c.x_act] == 0)
