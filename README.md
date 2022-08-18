@@ -1,3 +1,5 @@
 # 42_Filler
-[<img src="https://github.com/IanGaplichnik/42_Filler/blob/master/img/game_small.mov" />](https://github.com/IanGaplichnik/42_Filler/blob/master/img/game_small.mov)
-<img src="https://github.com/IanGaplichnik/42_Filler/blob/master/img/game_big.mov" />
+
+https://user-images.githubusercontent.com/70972514/185442223-1ea18f2e-d4ad-463a-bdb2-34d31479caf5.mov
+
+https://user-images.githubusercontent.com/70972514/185442279-4eda70d5-2985-473d-9bc2-602debe52a37.mov
