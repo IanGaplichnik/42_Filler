@@ -15,15 +15,15 @@ pygame.display.set_caption("42_Filler")
 
 clock = pygame.time.Clock()
 game_font = "visualizer/press-start/prstart.ttf"
-p1_old_color = 0x9b5de5
-p1_new_color = 0xf15bb5
-p2_old_color = 0x00bbf9
-p2_new_color = 0x00f5d4
+# p1_old_color = 0x9b5de5
+# p1_new_color = 0xf15bb5
+# p2_old_color = 0x00bbf9
+# p2_new_color = 0x00f5d4
 
-# p1_old_color = 0x2a9d8f
-# p1_new_color = 0xe63946
-# p2_old_color = 0x8338ec
-# p2_new_color = 0xffe66d
+p1_old_color = 0x2a9d8f
+p1_new_color = 0xe63946
+p2_old_color = 0x8338ec
+p2_new_color = 0xffe66d
 
 p1_text = p1_old_color << 8
 p2_text = p2_old_color << 8
