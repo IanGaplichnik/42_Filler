@@ -1,0 +1,21 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory `/Users/igaplich/Documents/Curriculum/current/filler'
+mkdir -p ./obj/
+gcc -Wall -Wextra -Werror -fsanitize=address -c src/main.c -o obj/main.o
+ 
+mkdir -p ./obj/
+gcc -Wall -Wextra -Werror -fsanitize=address -c src/utils.c -o obj/utils.o
+mkdir -p ./obj/
+gcc -Wall -Wextra -Werror -fsanitize=address -c src/map.c -o obj/map.o
+mkdir -p ./obj/
+gcc -Wall -Wextra -Werror -fsanitize=address -c src/piece.c -o obj/piece.o
+mkdir -p ./obj/
+gcc -Wall -Wextra -Werror -fsanitize=address -c src/insert_piece.c -o obj/insert_piece.o
+mkdir -p ./obj/
+gcc -Wall -Wextra -Werror -fsanitize=address -c src/heatmap.c -o obj/heatmap.o
+make -C libftprintf/
+echo "\033[0;33mCompiling igaplich.filler\033[0m"
+gcc -o igaplich.filler -Wall -Wextra -Werror -fsanitize=address ./obj/main.o ./obj/utils.o ./obj/map.o ./obj/piece.o ./obj/insert_piece.o ./obj/heatmap.o -I libftprintf/includes/ft_printf.h -L. libftprintf/libftprintf.a
+echo "\033[0;32mOK\033[0m"
+make: Leaving directory `/Users/igaplich/Documents/Curriculum/current/filler'
+ 

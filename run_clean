@@ -11,7 +11,7 @@ case "${1}" in
 ;;
 
 2)
-	resources/filler_vm -f resources/maps/map02 -p1 ./igaplich.filler -p2 resources/players/nsamoilo.filler | python3 visualizer/vis.py && pkill -f .filler # -q
+	resources/filler_vm -f resources/maps/map02 -p1 ./igaplich.filler -p2 resources/players/carli.filler | python3 visualizer/vis.py && pkill -f .filler # -q
 ;;
 
 3)

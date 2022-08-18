@@ -15,15 +15,15 @@ pygame.display.set_caption("42_Filler")
 
 clock = pygame.time.Clock()
 game_font = "visualizer/press-start/prstart.ttf"
-p1_old_color = 0x9b5de5
-p1_new_color = 0xf15bb5
-p2_old_color = 0x00bbf9
-p2_new_color = 0x00f5d4
+# p1_old_color = 0x9b5de5
+# p1_new_color = 0xf15bb5
+# p2_old_color = 0x00bbf9
+# p2_new_color = 0x00f5d4
 
-# p1_old_color = 0x2a9d8f
-# p1_new_color = 0xe63946
-# p2_old_color = 0x8338ec
-# p2_new_color = 0xffe66d
+p1_old_color = 0x2a9d8f
+p1_new_color = 0xe63946
+p2_old_color = 0x8338ec
+p2_new_color = 0xffe66d
 
 p1_text = p1_old_color << 8
 p2_text = p2_old_color << 8
@@ -207,7 +207,7 @@ def pause_finish(o_score, x_score, p1, p2):
 		text_surface = text_out.render(p2 + " wins", True, p2_text)
 	if x_score == o_score:
 		text_surface = text_out.render("Draw", True, 'white')
-	screen.blit(text_surface, (130 / res_div, 870 / res_div))
+	screen.blit(text_surface, (130 / res_div, 925 / res_div))
 	pygame.display.update()
 
 	while paused:
