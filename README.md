@@ -1,2 +1,2 @@
 # 42_Filler
-![alt text](img/game_small.png)
+<img src="https://github.com/IanGaplichnik/42_Filler/tree/master/img/game_small.gif" />
