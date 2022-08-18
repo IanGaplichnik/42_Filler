@@ -6,7 +6,7 @@ import time
 
 pygame.init()
 
-res_div = 0.7 #MODIFY TO CHANGE RESOLUTION
+res_div = 1 #MODIFY TO CHANGE RESOLUTION
 
 screen = pygame.display.set_mode((1790 / res_div, 1000 / res_div))
 screen_color = (18, 18, 20)
