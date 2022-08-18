@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../includes/filler.h"
-#include <stdio.h>
 
 /* 
  * Function, calling different map operations.

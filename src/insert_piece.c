@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../includes/filler.h"
-#include <math.h>
 
 /*
  * Checking, if current position is better, than previous,
