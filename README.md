@@ -1,4 +1,5 @@
 # 42_Filler
+https://user-images.githubusercontent.com/70972514/185442223-1ea18f2e-d4ad-463a-bdb2-34d31479caf5.mov
 Filler is a project, aimed to create a player, competing with another player at a Battle Arena! <br>
 The rules of the game are simple:
 <ul>
@@ -44,6 +45,5 @@ For instance:
 
 Use arrows to control speed, spacebar to pause the game, and ESC to quit.
 
-https://user-images.githubusercontent.com/70972514/185442223-1ea18f2e-d4ad-463a-bdb2-34d31479caf5.mov
 
 https://user-images.githubusercontent.com/70972514/185442279-4eda70d5-2985-473d-9bc2-602debe52a37.mov
