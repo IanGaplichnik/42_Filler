@@ -1,5 +1,7 @@
 # 42_Filler
-https://user-images.githubusercontent.com/70972514/185442223-1ea18f2e-d4ad-463a-bdb2-34d31479caf5.mov <br>
+
+https://user-images.githubusercontent.com/70972514/185442223-1ea18f2e-d4ad-463a-bdb2-34d31479caf5.mov
+
 Filler is a project, aimed to create a player, competing with another player at a Battle Arena! <br>
 The rules of the game are simple:
 <ul>
